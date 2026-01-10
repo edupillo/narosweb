@@ -1,0 +1,849 @@
+/* --- 1. VARIABLES Y RESET --- */
+:root {
+  --bg-color: #F5F5F1;
+  --text-color: #1A1A1A;
+  --accent-color: #333;
+  --white: #ffffff;
+  --light-grey: #e0e0e0;
+  --dark-grey: #666;
+  --gradient-middle: #e8e8e4;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  background-color: var(--bg-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  overflow-x: hidden;
+}
+
+/* --- 2. HERO SECTION (Altura reducida) --- */
+.hero-background {
+  background-image: url('fondo.jpg');
+  background-size: cover;
+  background-position: center center;
+  color: var(--white);
+  position: relative;
+  height: 65vh; /* Ajustado para que no ocupe toda la pantalla al inicio */
+}
+
+.hero-background::before {
+  content: "";
+  position: absolute;
+  top: 0; left: 0; right: 0; bottom: 0;
+  background: rgba(0, 0, 0, 0.4);
+  z-index: 1;
+}
+
+/* --- 3. NAVEGACIÓN (A la derecha, sin logo) --- */
+header {
+  padding: 30px 5%;
+  position: relative;
+  z-index: 1000;
+}
+
+.nav-right {
+  display: flex;
+  justify-content: flex-end; /* Enlaces a la derecha */
+  align-items: center;
+}
+
+.nav-right ul {
+  display: flex;
+  list-style: none;
+  gap: 30px;
+}
+
+.nav-right ul li a {
+  text-decoration: none;
+  color: var(--white);
+  font-weight: 700;
+  text-transform: uppercase;
+  font-size: 0.9rem;
+  letter-spacing: 1px;
+  transition: color 0.3s ease;
+}
+
+.nav-right ul li a:hover {
+  color: var(--light-grey);
+}
+
+/* --- 4. CONTENIDO HERO --- */
+.hero {
+  height: calc(65vh - 100px); /* Ajustado a la nueva altura del fondo */
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 0 10%;
+  position: relative;
+  z-index: 2;
+}
+
+.hero h1 { 
+  font-size: 3rem; 
+  margin-bottom: 20px; 
+  text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
+
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 30px;
+  text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+}
+
+.btn-primary {
+  background-color: var(--white);
+  color: #000;
+  padding: 15px 35px;
+  border-radius: 0; /* Bordes firmes */
+  text-decoration: none;
+  font-weight: 700;
+  text-transform: uppercase;
+  display: inline-block;
+  transition: 0.3s;
+}
+
+.btn-primary:hover {
+  background-color: var(--light-grey);
+}
+
+/* --- 5. SECCIÓN SERVICIOS (Planes) --- */
+.services { 
+  padding: 80px 5%; 
+  background-color: var(--bg-color); /* Fondo crema */
+}
+
+.section-title { 
+  text-align: center; 
+  margin-bottom: 50px; 
+  font-size: 2.5rem; 
+  color: var(--text-color);
+  text-transform: uppercase;
+  letter-spacing: 2px;
+}
+
+.services-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 30px;
+}
+
+.card {
+  background: var(--white);
+  padding: 40px;
+  border-radius: 0; /* Bordes firmes */
+  box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+  transition: transform 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  border: 1px solid var(--light-grey);
+}
+
+.card:hover { 
+  transform: translateY(-10px); 
+}
+
+.price { font-size: 2rem; font-weight: bold; color: var(--text-color); }
+.currency { font-size: 1rem; font-weight: normal; color: var(--dark-grey);}
+.maint { color: var(--dark-grey); font-size: 0.9rem; margin-bottom: 20px; }
+
+.card ul { list-style: none; margin-bottom: 30px; flex-grow: 1; }
+.card ul li { margin-bottom: 10px; }
+.card ul li::before { content: "✓ "; color: #333; font-weight: bold; }
+
+.buttons-container { 
+  display: flex; 
+  flex-direction: column; 
+  align-items: center; 
+  gap: 15px; 
+  width: 100%; 
+  margin-top: auto; 
+}
+
+/* Botón Saber Más (Estilo Firme) */
+.btn-info {
+  display: block;
+  text-align: center;
+  padding: 12px 0;
+  text-decoration: none;
+  color: var(--accent-color);
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  border: 2px solid var(--accent-color);
+  border-radius: 0; /* Bordes firmes */
+  transition: all 0.3s ease;
+  width: 100%;
+}
+
+.btn-info:hover {
+  background-color: var(--accent-color);
+  color: var(--white);
+}
+
+/* Card Destacada */
+.card.featured { border: 2px solid var(--accent-color); }
+.popular-tag { 
+  position: absolute; top: -15px; right: 20px; 
+  background-color: var(--accent-color); color: var(--white); 
+  padding: 5px 15px; border-radius: 0; /* Firme */
+  font-size: 0.8rem; font-weight: bold; text-transform: uppercase; 
+}
+
+/* --- 6. SECCIÓN SOBRE NOSOTROS (Estilo Formal) --- */
+.about {
+  background-color: var(--white); /* Blanco para diferenciar de planes */
+  padding: 100px 5%;
+  text-align: center;
+}
+
+.about-intro {
+  font-size: 1.2rem;
+  max-width: 850px;
+  margin: 0 auto 50px auto;
+  line-height: 1.8;
+  color: var(--text-color);
+  font-weight: 400;
+}
+
+.trust-grid-firm {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.trust-card-firm {
+  background: var(--white);
+  padding: 40px 30px;
+  border: 2px solid var(--accent-color);
+  border-radius: 0; /* Bordes firmes */
+  text-align: left;
+  transition: all 0.3s ease;
+}
+
+.trust-card-firm h3 {
+  font-size: 1.1rem;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  color: var(--text-color);
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.trust-card-firm p {
+  font-size: 1rem;
+  color: var(--dark-grey);
+  line-height: 1.6;
+}
+
+/* --- 7. FOOTER --- */
+footer { 
+  padding: 50px 5%; 
+  background: #000; 
+  color: #fff; 
+  text-align: center; 
+}
+
+.footer-icons { margin-bottom: 20px; }
+.footer-icons img { 
+  width: 30px; 
+  height: 30px; 
+  margin: 0 15px; 
+  transition: transform 0.3s ease; 
+}
+.footer-icons img:hover { transform: scale(1.2); }
+
+/* --- 8. RESPONSIVE --- */
+@media (max-width: 768px) {
+  .hero h1 { font-size: 2.2rem; }
+  .hero-background { height: 70vh; }
+  .nav-right ul { gap: 15px; }
+  .nav-right ul li a { font-size: 0.75rem; }
+  .services-grid, .trust-grid-firm { grid-template-columns: 1fr; }
+}
+.footer-icons {
+  display: flex;           /* pone los enlaces en fila */
+  justify-content: center; /* centra horizontalmente */
+  align-items: center;     /* centra verticalmente */
+  gap: 20px;               /* espacio entre íconos */
+}
+
+/* --- Card Automatización (Gris / Desactivado) --- */
+.disabled-card {
+  background-color: #f0f0f0 !important; /* Gris claro */
+  border: 1px solid #ccc !important;
+  box-shadow: none !important;
+  position: relative;
+  overflow: hidden;
+}
+
+.disabled-card h3, 
+.disabled-card p, 
+.disabled-card li {
+  color: #888; /* Texto apagado */
+}
+
+.disabled-card b {
+  color: #666; /* Resaltados un poco más visibles pero en la gama del gris */
+}
+
+/* Etiqueta Próximamente Firme */
+.soon-badge {
+  position: absolute;
+  top: 0;
+  right: 0;
+  background-color: #888;
+  color: #fff;
+  padding: 5px 15px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+/* Botón Deshabilitado Firme */
+.btn-disabled-firm {
+  background-color: #ccc;
+  color: #999;
+  border: none;
+  padding: 12px 0;
+  width: 100%;
+  font-weight: 700;
+  text-transform: uppercase;
+  cursor: not-allowed;
+  border-radius: 0; /* Bordes rectos */
+}
+
+/* El botón de info se mantiene firme y clickeable */
+.btn-info-firm {
+  display: block;
+  text-align: center;
+  padding: 12px 0;
+  text-decoration: none;
+  color: #666;
+  font-size: 0.9rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  border: 2px solid #aaa;
+  border-radius: 0; /* Bordes rectos */
+  width: 100%;
+  transition: all 0.3s;
+}
+
+.btn-info-firm:hover {
+  background-color: #888;
+  color: #fff;
+  border-color: #888;
+}
+
+/* --- PAGINAS DE INFORMACIÓN (Landing Info) --- */
+.info-page {
+  background-color: var(--white);
+  color: var(--text-color);
+}
+
+.header-dark {
+  background-color: #000;
+  padding: 20px 0;
+}
+
+.content-container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: 60px 5%;
+}
+
+.info-hero {
+  text-align: center;
+  margin-bottom: 60px;
+}
+
+.info-hero h1 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: -1px;
+  margin-bottom: 20px;
+}
+
+.subtitle {
+  font-size: 1.2rem;
+  color: var(--dark-grey);
+  max-width: 700px;
+  margin: 0 auto;
+}
+
+/* --- TABLA FIRME --- */
+.table-wrapper {
+  overflow-x: auto;
+  margin-top: 40px;
+}
+
+.firm-table {
+  width: 100%;
+  border-collapse: collapse;
+  border: 2px solid var(--text-color); /* Borde firme exterior */
+  font-size: 0.95rem;
+}
+
+.firm-table th {
+  background-color: var(--text-color);
+  color: var(--white);
+  padding: 20px;
+  text-align: left;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+}
+
+.firm-table td {
+  padding: 15px 20px;
+  border: 1px solid #ddd;
+}
+
+.firm-table tr:nth-child(even) {
+  background-color: var(--bg-color); /* Alternancia de color crema */
+}
+
+.highlight-row {
+  background-color: #f0f0f0;
+  font-weight: 700;
+}
+
+.info-footer-action {
+  margin-top: 80px;
+  text-align: center;
+  border-top: 2px solid #eee;
+  padding-top: 40px;
+}
+
+.info-footer-action p {
+  font-size: 1.3rem;
+  font-weight: 700;
+  max-width: 600px;
+  margin: 0 auto;
+}
+
+/* Reutilizamos el botón firme */
+.btn-primary {
+  border-radius: 0 !important;
+  color: #000000;
+}
+
+/* --- ESTILOS ESPECÍFICOS WEB COMPLETA --- */
+
+.badge {
+  background: var(--accent-color);
+  color: var(--white);
+  padding: 5px 12px;
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  display: inline-block;
+  margin-bottom: 10px;
+}
+
+/* Grid de Problema y Solución */
+.grid-problem-solution {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+  margin-bottom: 80px;
+}
+
+.box-problem, .box-solution {
+  padding: 40px;
+  border: 2px solid var(--accent-color);
+}
+
+.box-problem {
+  background-color: #f9f9f9;
+  border-color: #ddd;
+}
+
+.box-solution {
+  background-color: var(--accent-color);
+  color: var(--white);
+}
+
+.box-problem h3, .box-solution h3 {
+  margin-bottom: 20px;
+  font-size: 1.3rem;
+}
+
+.box-problem ul, .box-solution ul {
+  list-style: none;
+}
+
+.box-problem li, .box-solution li {
+  margin-bottom: 10px;
+  font-size: 0.95rem;
+}
+
+/* Features Grid Firm */
+.features-grid-firm {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  margin-top: 40px;
+}
+
+.feature-item {
+  border: 1px solid #eee;
+  padding: 30px;
+  background: var(--bg-color);
+  transition: all 0.3s;
+}
+
+.feature-item:hover {
+  border-color: var(--accent-color);
+}
+
+.feature-item h4 {
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  margin-bottom: 15px;
+  font-size: 1rem;
+}
+
+/* Comparativa simple */
+.simple-comparison {
+  text-align: center;
+  margin: 80px 0;
+  padding: 40px;
+  background: #f0f0f0;
+}
+
+.vs {
+  font-weight: 700;
+  margin: 10px 0;
+  color: #888;
+}
+
+/* CTA Final */
+.cta-box {
+  text-align: center;
+  padding: 60px;
+  background: #ffffff;
+  color: #000000;
+}
+
+.cta-box h2 { font-size: 2.2rem; margin-bottom: 10px; }
+.cta-box h3 { font-size: 1.5rem; color: #000000; margin-bottom: 20px; }
+.cta-box p { margin-bottom: 30px; font-style: italic; opacity: 0.8; }
+
+/* Responsive */
+@media (max-width: 768px) {
+  .grid-problem-solution { grid-template-columns: 1fr; }
+}
+
+/* --- ESTILOS IA Y AUTOMATIZACIÓN --- */
+
+.badge-gold {
+  background: #c5a059; /* Un tono dorado/bronce para lo Premium */
+  color: white;
+  padding: 5px 15px;
+  font-size: 0.75rem;
+  font-weight: 700;
+  letter-spacing: 2px;
+  display: inline-block;
+  margin-bottom: 15px;
+}
+
+/* Concepto */
+.ia-concept {
+  margin: 60px 0;
+  padding: 40px;
+  background: var(--bg-color);
+  border: 1px solid #ddd;
+}
+
+.concept-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 40px;
+  align-items: center;
+}
+
+.concept-quote {
+  font-size: 1.5rem;
+  font-style: italic;
+  border-left: 4px solid var(--accent-color);
+  padding-left: 20px;
+  color: var(--dark-grey);
+}
+
+/* Agentes de IA */
+.agents-box-firm {
+  border: 2px solid var(--accent-color);
+  padding: 40px;
+  margin-top: 30px;
+}
+
+.agents-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 20px;
+  margin-top: 30px;
+}
+
+.agent-card {
+  background: #fff;
+  padding: 20px;
+  border: 1px solid #eee;
+}
+
+.agent-card h5 {
+  margin-bottom: 10px;
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+/* Grid de 3 columnas firmes */
+.firm-grid-3 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.firm-box {
+  border: 1px solid var(--accent-color);
+  padding: 25px;
+  background: white;
+}
+
+/* VS Section */
+.vs-container-firm {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #000;
+  color: #fff;
+  padding: 50px;
+  margin: 80px 0;
+}
+
+.vs-item { flex: 1; text-align: center; }
+.vs-item.highlight { color: #c5a059; }
+.vs-divider { width: 2px; height: 60px; background: #333; }
+
+/* CTA Final IA */
+.final-cta-ia {
+  text-align: center;
+  padding: 80px 0;
+}
+
+.final-cta-ia h2 { font-size: 2rem; margin-bottom: 15px; }
+.final-cta-ia p { margin-bottom: 40px; color: var(--dark-grey); }
+
+/* Listas firmes */
+.firm-list {
+  list-style: none;
+  margin-top: 20px;
+}
+.firm-list li::before {
+  content: "■ ";
+  color: var(--accent-color);
+  font-size: 0.8rem;
+  margin-right: 10px;
+}
+
+@media (max-width: 768px) {
+  .concept-grid, .vs-container-firm { grid-template-columns: 1fr; flex-direction: column; gap: 30px; }
+  .vs-divider { display: none; }
+}
+/* BOTÓN PREMIUM: CUADRANTE NEGRO Y LETRAS DORADAS */
+.btn-factibilidad-premium {
+  display: inline-block;
+  background-color: #000000;   /* Cuadrante Negro Sólido */
+  color: #D4AF37;              /* Dorado Metálico */
+  padding: 20px 50px;
+  text-decoration: none;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 3px;         /* Espaciado elegante entre letras */
+  border-radius: 0;            /* BORDE TOTALMENTE RECTO (FIRME) */
+  transition: all 0.4s ease;
+  text-align: center;
+  cursor: pointer;
+}
+
+.btn-factibilidad-premium:hover {
+  background-color: #D4AF37;   /* Al pasar el mouse se invierte: fondo dorado */
+  color: #000000;              /* Letras negras */
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+}
+.btn-cuadrante-negro {
+  display: inline-block;
+  background-color: #000000 !important; /* Fondo Negro */
+  color: #ffffff !important;           /* Letra Blanca */
+  padding: 20px 50px;
+  text-decoration: none;               /* Quita el subrayado */
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 2px;
+  border-radius: 0 !important;         /* Bordes rectos firmes */
+  border: 2px solid #000000;
+  transition: all 0.3s ease;
+  text-align: center;
+}
+
+.btn-cuadrante-negro:hover {
+  background-color: #333333 !important; /* Gris oscuro al pasar el mouse */
+  color: #ffffff !important;
+  transform: translateY(-3px);          /* Efecto de levante */
+}
+
+/* --- CONFIGURACIÓN BASE --- */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  font-family: 'Inter', sans-serif;
+  line-height: 1.6;
+  overflow-x: hidden; /* Evita scroll horizontal molesto */
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/* --- CONTENEDOR GLOBAL --- */
+.container, .content-container {
+  width: 90%;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+/* --- HEADER Y NAVEGACIÓN --- */
+header {
+  padding: 1rem 5%;
+  display: flex;
+  justify-content: flex-end; /* Alinea nav a la derecha */
+  align-items: center;
+}
+
+.nav-right ul {
+  display: flex;
+  list-style: none;
+  gap: 20px;
+}
+
+/* Responsive Nav: En móviles se apila */
+@media (max-width: 768px) {
+  header {
+      justify-content: center;
+  }
+  .nav-right ul {
+      gap: 10px;
+      font-size: 0.9rem;
+  }
+}
+
+/* --- HERO SECTION --- */
+.hero {
+  padding: 80px 5%;
+  text-align: center;
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 4rem); /* Tamaño fluido */
+  margin-bottom: 20px;
+}
+
+/* --- GRIDS RESPONSIVE (Servicios, Trust, Features) --- */
+/* Esta es la clave: auto-fit permite que los elementos bajen solos */
+.services-grid, 
+.trust-grid-firm, 
+.features-grid-firm, 
+.firm-grid-3, 
+.agents-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: 20px;
+  padding: 20px 0;
+}
+
+/* --- COMPARATIVA (TABLAS) --- */
+/* Las tablas son difíciles en móvil, usamos un wrapper con scroll */
+.table-wrapper {
+  width: 100%;
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+.firm-table {
+  width: 100%;
+  min-width: 600px; /* Obliga a la tabla a no achicarse de más */
+  border-collapse: collapse;
+}
+
+/* --- SECCIONES DE PROBLEMA/SOLUCIÓN --- */
+.grid-problem-solution {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 30px;
+}
+
+@media (max-width: 768px) {
+  .grid-problem-solution {
+      grid-template-columns: 1fr; /* Una sola columna en móvil */
+  }
+}
+
+/* --- AJUSTES DE TARJETAS (Cards) --- */
+.card, .feature-item, .firm-box, .agent-card {
+  padding: 25px;
+  border-radius: 12px;
+  height: 100%; /* Para que todas midan lo mismo en la fila */
+}
+
+/* --- BOTONES --- */
+.buttons-container {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  width: 100%;
+}
+
+.btn-primary, .btn-info, .btn-cuadrante-negro {
+  display: inline-block;
+  text-align: center;
+  padding: 12px 20px;
+  width: 100%; /* Botones grandes en móvil para facilitar el click */
+}
+
+@media (min-width: 768px) {
+  .btn-primary, .btn-info {
+      width: auto; /* En desktop vuelven a su tamaño normal */
+  }
+}
+
+/* --- FOOTER --- */
+footer {
+  padding: 40px 5%;
+  text-align: center;
+}
+
+.footer-icons {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin-bottom: 20px;
+}
